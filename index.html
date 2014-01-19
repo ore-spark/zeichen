@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Site</title>
+    <link rel="stylesheet" href="zeichen.css">
+  </head>
+  <body>
+    <button class="fire-error" data-direction="tr">Error message top right</button>
+    <button class="fire-error" data-direction="br">Error message bottom right</button>
+    <button class="fire-error" data-direction="tl">Error message top left</button>
+    <button class="fire-error" data-direction="bl">Error message bottom left</button>
+    <button class="fire-error" data-direction="tm">Error top mid</button>
+    <button class="fire-error" data-direction="bm">Error bottom mid</button>
+    <button id="fire-clear">Clear all messages</button>
+    <button id="fire-error-extra">Template Message</button>
+    <script src="jquery-2.0.3.min.js"></script>
+    <script src="zeichen.js"></script>
+    <script>          
+     $(document).ready(function(){
+       /**
+        * zeichen.clear(); to remove all message from the screen
+        */
+       $('#fire-clear').on('click', function(){
+	 zeichen.clear();
+       });
+       /**
+        * zeichen.info('my message');
+        * zeichen.success('my message');
+        * zeichen.warning('my message');
+        * zeichen.error('my message');
+        * these funtions pop a message to the browser in whatever the default position is
+        */
+       $('.fire-error').on('click', function(){
+         var placement = $(this).attr('data-direction');
+         console.log(placement);
+	 var choices = ['br', 'tr', 'bl', 'tr', 'br'];
+	 zeichen.info('Here is some information about something that you might need to know about',
+                      {listPlacement:placement}); 
+	 zeichen.success('Whatever you just did, it worked. Good job, everything is not broken',
+                         {listPlacement:placement}); 
+	 zeichen.warning('Whatever you just did, something either went minorly wrong, or there could be some potentially dangerous results.',
+                         {listPlacement:placement}); 
+	 zeichen.error('Shit is straight up broken. You have destroyed us all.',
+                       {listPlacement:placement}); 
+       });
+       /**
+        * zeichen.info({heading: 'My heading', body:'Something you should know'});
+        * zeichen.success({heading: 'My heading', body:'Something you should know'});
+        * zeichen.warning({heading: 'My heading', body:'Something you should know'});
+        * zeichen.error({heading: 'My heading', body:'Something you should know'});
+        * these funtions pop a message to the browser in whatever the default position is
+        *
+        * zeichen.options contains the full options array. 
+        * They can be set globally with zechen.options.<option name> = 'something';
+        * for a better description of what stuff does, read the comments in the js file itself
+        * additionally, the options can be passed on the fly as the second argument of the
+        * zeichen.info, .success, etc functions like:
+        * zeichen.info('my message', {autoDismiss:false});
+        */
+       $('#fire-error-extra').on('click', function(){
+         console.log(zeichen.options);
+         zeichen.info({heading: 'My heading', body:'Something you should know'});
+         zeichen.info('my message that doesn\'t autodismiss, and overrides the global for only this message', {autoDismiss:false});
+         zeichen.info('my message that does autodismiss, and overrides the global for only this message', {autoDismiss:true});
+         zeichen.info('Click on me for an action that fires', {
+           tapDismiss:false,
+           listItemActionCallback: function(){
+             alert('Hi there, you clicked on me :)');
+           },
+         });
+       });
+     });
+    </script>
+  </body>	
+</html>

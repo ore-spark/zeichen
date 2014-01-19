@@ -1,0 +1,179 @@
+/**
+ * Messages aligned on RHS of screen
+ * 
+ */
+
+
+@-webkit-keyframes closeRightListItem {
+    0%   {
+    }
+    100% {
+	max-height: 0;
+        margin:0;
+    }
+}
+
+
+@-webkit-keyframes openRightListItem {
+    0%   {
+	max-height: 0;
+        margin:0;
+    }
+    100% {
+    }
+}
+
+@-webkit-keyframes closeRightWrapper {
+    0%   {
+        -webkit-transform: translate(0, 0);
+	opacity:1;
+    }
+    100% {
+        -webkit-transform: translate(100%, 0);
+	opacity:0;
+    }
+}
+
+@-webkit-keyframes openRightWrapper {
+    0%   {
+        -webkit-transform: translate(100%, 0);
+	opacity:0;
+    }
+    100% {
+        -webkit-transform: translate(0, 0);
+	opacity:1;
+    }
+}
+
+
+/**
+ * Messages aligned on LHS of screen
+ *
+ */
+@-webkit-keyframes closeLeftListItem {
+    0%   {
+    }
+    100% {
+	max-height: 0;
+        margin:0;
+    }
+}
+
+@-webkit-keyframes openLeftListItem {
+    0%   {
+	max-height: 0;
+        margin:0;
+    }
+    100% {
+    }
+}
+
+@-webkit-keyframes closeLeftWrapper {
+    0%   {
+        -webkit-transform: translate(0, 0);
+	opacity:1;
+    }
+    100% {
+        -webkit-transform: translate(-100%, 0);
+	opacity:0;
+    }
+}
+
+@-webkit-keyframes openLeftWrapper {
+    0%   {
+        -webkit-transform: translate(-100%, 0);
+	opacity:0;
+    }
+    100% {
+        -webkit-transform: translate(0, 0);
+	opacity:1;
+    }
+}
+
+/**
+ * Messages on top mid
+ *
+ */
+@-webkit-keyframes closeTopListItem {
+    0%   {
+    }
+    100% {
+	max-height: 0;
+        margin:0;
+    }
+}
+
+@-webkit-keyframes openTopListItem {
+    0%   {
+	max-height: 0;
+        margin:0;
+    }
+    100% {
+    }
+}
+
+@-webkit-keyframes closeTopWrapper {
+    0%   {
+        -webkit-transform: scaleY(1);
+	opacity:1;
+    }
+    100% {
+        -webkit-transform: scaleY(0);
+	opacity:0;
+    }
+}
+
+@-webkit-keyframes openTopWrapper {
+    0%   {
+        -webkit-transform: scaleY(0);
+	opacity:0;
+    }
+    100% {
+        -webkit-transform: scaleY(1);
+	opacity:1;
+    }
+}
+
+/**
+ * Messages on bottom mid
+ *
+ */
+@-webkit-keyframes closeBottomListItem {
+    0%   {
+    }
+    100% {
+	max-height: 0;
+        margin:0;
+    }
+}
+
+@-webkit-keyframes openBottomListItem {
+    0%   {
+	max-height: 0;
+        margin:0;
+    }
+    100% {
+    }
+}
+
+@-webkit-keyframes closeBottomWrapper {
+    0%   {
+        -webkit-transform: scaleY(1);
+	opacity:1;
+    }
+    100% {
+        -webkit-transform: scaleY(0);
+	opacity:0;
+    }
+}
+
+@-webkit-keyframes openBottomWrapper {
+    0%   {
+        -webkit-transform: scaleY(0);
+	opacity:0;
+    }
+    100% {
+        -webkit-transform: scaleY(1);
+	opacity:1;
+    }
+}
