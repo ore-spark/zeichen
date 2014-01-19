@@ -98,7 +98,7 @@
                      listItemActionCallback: function(){}, //callback to fire on a user action
                      listItemLifetime: 7000, //time in ms until we start the fade/ removal animation steps
                      listItemShowDuration: 450, //time in ms for list item to animate before wrapper show begins
-                     listItemHideDuration: 300, //time in ms for list item to animate before item is destroyed
+                     listItemHideDuration: 500, //time in ms for list item to animate before item is destroyed
                      contentWrapperHideDuration: 500, //time in ms for content to animate before list item hide starts
                      
                      /* TEMPLATE OPTS */

@@ -1,0 +1,127 @@
+/**
+ * Messages aligned on RHS of screen
+ * 
+ */
+@-moz-keyframes closeRightListItem {
+  100% {
+    max-height: 0;
+    margin: 0rem; } }
+
+@-moz-keyframes openRightListItem {
+  0% {
+    max-height: 0;
+    margin: 0; } }
+
+@-moz-keyframes closeRightWrapper {
+  0% {
+    -moz-transform: translate(0, 0);
+    opacity: 1; }
+
+  100% {
+    -moz-transform: translate(100%, 0);
+    opacity: 0; } }
+
+@-moz-keyframes openRightWrapper {
+  0% {
+    -moz-transform: translate(100%, 0);
+    opacity: 0; }
+
+  100% {
+    -moz-transform: translate(0, 0);
+    opacity: 1; } }
+
+/**
+ * Messages aligned on LHS of screen
+ *
+ */
+@-moz-keyframes closeLeftListItem {
+  100% {
+    max-height: 0;
+    margin: 0; } }
+
+@-moz-keyframes openLeftListItem {
+  0% {
+    max-height: 0;
+    margin: 0; } }
+
+@-moz-keyframes closeLeftWrapper {
+  0% {
+    -moz-transform: translate(0, 0);
+    opacity: 1; }
+
+  100% {
+    -moz-transform: translate(-100%, 0);
+    opacity: 0; } }
+
+@-moz-keyframes openLeftWrapper {
+  0% {
+    -moz-transform: translate(-100%, 0);
+    opacity: 0; }
+
+  100% {
+    -moz-transform: translate(0, 0);
+    opacity: 1; } }
+
+/**
+ * Messages on top mid
+ *
+ */
+@-moz-keyframes closeTopListItem {
+  100% {
+    max-height: 0;
+    margin: 0; } }
+
+@-moz-keyframes openTopListItem {
+  0% {
+    max-height: 0;
+    margin: 0; } }
+
+@-moz-keyframes closeTopWrapper {
+  0% {
+    -moz-transform: scaleY(1);
+    opacity: 1; }
+
+  100% {
+    -moz-transform: scaleY(0);
+    opacity: 0; } }
+
+@-moz-keyframes openTopWrapper {
+  0% {
+    -moz-transform: scaleY(0);
+    opacity: 0; }
+
+  100% {
+    -moz-transform: scaleY(1);
+    opacity: 1; } }
+
+/**
+ * Messages on bottom mid
+ *
+ */
+@-moz-keyframes closeBottomListItem {
+  100% {
+    max-height: 0;
+    margin: 0; } }
+
+@-moz-keyframes openBottomListItem {
+  0% {
+    max-height: 0;
+    margin: 0; } }
+
+@-moz-keyframes closeBottomWrapper {
+  0% {
+    -moz-transform: scaleY(1);
+    opacity: 1; }
+
+  100% {
+    -moz-transform: scaleY(0);
+    opacity: 0; } }
+
+@-moz-keyframes openBottomWrapper {
+  0% {
+    -moz-transform: scaleY(0);
+    opacity: 0; }
+
+  100% {
+    -moz-transform: scaleY(1);
+    opacity: 1; } }
