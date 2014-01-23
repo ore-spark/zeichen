@@ -14,7 +14,6 @@
                      }
                  };
                  
-                 var idPrefix               = 'zeichen'; //containers of messages will like {{idPrefix}}-tr
                  var showingClass           = 'showing'; //class added for the showing animation trigger
                  var hidingClass            = 'hiding'; //class added for the hiding animation trigger
                  var listClass              = 'zeichen-list';
@@ -35,14 +34,14 @@
                   * 
                   */
                  var listTpl = '' +
-                     '<div class="{{listClass}} {{listClassExt}} " id="{{idPrefix}}-{{listPlacement}}" data-zeichen-list="{{listPlacement}}">' +
-                     '</div>';
+                     '<div class="{{listClass}} {{listClassExt}} " data-zeichen-list="{{listPlacement}}"></div>';
                  
                  /**
                   * List Item Template
                   * This is the li added to the list
                   * *[data-zeichen-list-item] is required, and used as a jquery selector to add animation classes
                   * *[data-zeichen-content-wrapper] is required, and used as a jquery selector to add animation classes
+                  * Good advice would be to not mess with the nesting of data-zeichen-content-wrapper inside data-zeichen-list-item
                   */
                  var listItemTpl = '' +
                      '<div class="{{listItemClass}} {{listItemClassExt}}" data-zeichen-list-item>' +
@@ -83,51 +82,53 @@
                  
                  //default options
                  var opts = {
-                     autoDismiss: false, //automatically dismiss alerts
-                     tapDismiss: true, //dismiss alert on click/tap of the content
-                     hoverRecover: true, //hovering over an autodismissed message while its fading restores it
-                     iconAutoCenter: true, //auto center the icon in the div
-                     iconShow: true, //show/hide status icon
-                     closeShow: true, //show/hide close input
-                     drawCallback: function(message, $listItem){}, //callback to fire after the message has been added to dom
-                     container: 'body', //selector for the list containers
-                     listPosition: 'fixed', //css position of the list
-                     listPlacement: 'tr', //default placement bl: bottom left, tm: top middle, etc
-                     listZIndex: 100, //z-index of the outer container
-                     listItemActionTrigger: 'click', //trigger passed to jquery on method
-                     listItemActionCallback: function(){}, //callback to fire on a user action
-                     listItemLifetime: 7000, //time in ms until we start the fade/ removal animation steps
-                     listItemShowDuration: 500, //time in ms for list item to animate before wrapper show begins
-                     listItemHideDuration: 500, //time in ms for list item to animate before item is destroyed
-                     contentWrapperHideDuration: 500, //time in ms for content to animate before list item hide starts
+                     autoDismiss: false, // bool : dismiss notification after listItemLifetime
+                     tapDismiss: true, // bool : dismiss notification on click/tap 
+                     hoverRecover: true, // bool : hovering over a notification while it is dismissing, restore it
+                     iconAutoCenter: true, // bool: use JS to vertically center the icon in data-zeichen-content-wrapper
+                     iconShow: true, // bool : show the status icon
+                     closeShow: true, // bool : show the close icon
+                     drawCallback: function(message, $listItem){}, // function : callback that fires after the notification is added to dom
+                     container: 'body', // string : css selector in which the notification container will be added
+                     listPosition: 'fixed', // string : css position of a notification container
+                     listPlacement: 'tr', // string : default placement bl: bottom left, tm: top middle, etc
+                     listZIndex: 100, // string/int : css z-index value for the notification container
+                     listItemActionTrigger: 'click', // string : jquery action to which listItemCallback is bound
+                     listItemActionCallback: function($listItem){}, // function : callback that fires on listItemActionTrigger
+                     listItemLifetime: 7000, // int : time in ms before the contentWrapper hide animation begins
+                     listItemShowDuration: 500, // int : time in ms for listItem to animate before the contentWrapper show animation begins
+                     listItemHideDuration: 500, // int : time in ms for listItem to animate before the listItem is removed from dom
+                     contentWrapperHideDuration: 500, // int : time in ms for contentWrapper to animate before listItem hide animation starts
                      
                      /* TEMPLATE OPTS */
-                     templateEngine: QuickEngine,
-                     listTpl: listTpl,
-                     listItemTpl: listItemTpl,
-                     iconTpl: iconTpl,
-                     closeTpl: closeTpl,
-                     messageTpl: messageTpl,
-                     contentTpl: contentTpl,                     
+                     templateEngine: QuickEngine, // object : the templating engine. Used like content = opts.templateEngine.compile(template).render(context)
+                     listTpl: listTpl, // string : template for data-zeichen-list
+                     listItemTpl: listItemTpl, // string : template for data-zeichen-list-item. Should nest data-zeichen-content-wrapper
+                     iconTpl: iconTpl, // string : template for data-zeichen-icon
+                     closeTpl: closeTpl, // string : template for data-zeichen-close
+                     contentTpl: contentTpl, // string : template for data-zeichen-content
+                     messageTpl: messageTpl, //string: template for the message
                      
                      /* CONTENT OPTS */
-                     successIconText: '&#10004;',
-                     warningIconText: '&#x2206;',
-                     errorIconText: '!',
-                     infoIconText: '&#x00BB;',
-                     closeText: '&times;',
+                     successIconText: '&#10004;', // string : html for the success icon
+                     warningIconText: '&#x2206;', // string : html for the warning icon
+                     errorIconText: '!', // string : html for the error icon
+                     infoIconText: '&#x00BB;', // string : html for the info icon
+                     closeText: '&times;', // string : html for the close icon
                      
-                     idPrefix: idPrefix,
-                     showingClass: showingClass,
-                     hidingClass: hidingClass,
+                     /* CLASS OPTS */
+                     showingClass: showingClass, // class used to apply showing animations
+                     hidingClass: hidingClass, // class used to apply hiding animations
                      
-                     listClass: listClass,
+                     /* first section here exists for the concept of a "primary" class for each element */
+                     listClass: listClass, 
                      listItemClass: listItemClass,
                      contentWrapperClass: contentWrapperClass,
                      iconClass: iconClass,
                      contentClass: contentClass,
                      closeClass: closeClass,
                      
+                     /* additional css appended after the above classes. Ex: class="{{listClass}} {{listClassExt}}" */
                      listClassExt: listClassExt,
                      listItemClassExt: listItemClassExt,
                      contentWrapperClassExt: contentWrapperClassExt,
@@ -192,7 +193,6 @@
                      
                      if($list.length === 0){
                          $list = $(opts.templateEngine.compile(opts.listTpl).render({
-                             idPrefix: opts.idPrefix, 
                              listClass: opts.listClass, 
                              listClassExt: opts.listClassExt, 
                              listPlacement: placement,
@@ -383,7 +383,7 @@
                      //bind listener for action callback
                      $listItem.on(opts.listItemActionTrigger, function(e){
                          e.preventDefault();
-                         opts.listItemActionCallback();
+                         opts.listItemActionCallback($(this));
                      });
 
                      //bind the tap/click dismiss listener if set
