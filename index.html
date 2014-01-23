@@ -2,17 +2,30 @@
 <html>
   <head>
     <title>Site</title>
+    <link rel="stylesheet" href="animations/fadeInOut/compiled.css">
     <link rel="stylesheet" href="zeichen.css">
   </head>
   <body>
-    <button class="fire-error" data-direction="tr">Error message top right</button>
-    <button class="fire-error" data-direction="br">Error message bottom right</button>
-    <button class="fire-error" data-direction="tl">Error message top left</button>
-    <button class="fire-error" data-direction="bl">Error message bottom left</button>
-    <button class="fire-error" data-direction="tm">Error top mid</button>
-    <button class="fire-error" data-direction="bm">Error bottom mid</button>
-    <button id="fire-clear">Clear all messages</button>
-    <button id="fire-error-extra">Template Message</button>
+    <style scoped>
+     body{
+       padding:0;
+       margin:0;      
+     }
+     .container{
+       width:40rem;
+       margin:10rem auto 0 auto;
+     }
+    </style>
+    <div class="container">      
+      <button class="fire-error" data-direction="tr">Error message top right</button>
+      <button class="fire-error" data-direction="br">Error message bottom right</button>
+      <button class="fire-error" data-direction="tl">Error message top left</button>
+      <button class="fire-error" data-direction="bl">Error message bottom left</button>
+      <button class="fire-error" data-direction="tm">Error top mid</button>
+      <button class="fire-error" data-direction="bm">Error bottom mid</button>
+      <button id="fire-clear">Clear all messages</button>
+      <button id="fire-error-extra">Template Message</button>
+    </div>
     <script src="jquery-2.0.3.min.js"></script>
     <script src="zeichen.js"></script>
     <script>          
@@ -34,12 +47,14 @@
          var placement = $(this).attr('data-direction');
          console.log(placement);
 	 var choices = ['br', 'tr', 'bl', 'tr', 'br'];
+         /*
 	 zeichen.info('Here is some information about something that you might need to know about',
                       {listPlacement:placement}); 
 	 zeichen.success('Whatever you just did, it worked. Good job, everything is not broken',
                          {listPlacement:placement}); 
 	 zeichen.warning('Whatever you just did, something either went minorly wrong, or there could be some potentially dangerous results.',
                          {listPlacement:placement}); 
+         */
 	 zeichen.error('Shit is straight up broken. You have destroyed us all.',
                        {listPlacement:placement}); 
        });

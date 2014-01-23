@@ -1,0 +1,492 @@
+/**
+ * Messages aligned on RHS of screen
+ * 
+ */
+
+
+@-webkit-keyframes closeRightListItem {
+    0%   {
+    }
+    100% {
+	max-height: 0;
+        margin:0;
+    }
+}
+
+
+@-webkit-keyframes openRightListItem {
+    0%   {
+	max-height: 0;
+        margin:0;
+    }
+    100% {
+    }
+}
+
+@-webkit-keyframes closeRightWrapper {
+    0%   {
+	opacity:1;
+    }
+    100% {
+	opacity:0;
+    }
+}
+
+@-webkit-keyframes openRightWrapper {
+    0%   {
+	opacity:0;
+    }
+    100% {
+	opacity:1;
+    }
+}
+
+
+/**
+ * Messages aligned on LHS of screen
+ *
+ */
+@-webkit-keyframes closeLeftListItem {
+    0%   {
+    }
+    100% {
+	max-height: 0;
+        margin:0;
+    }
+}
+
+@-webkit-keyframes openLeftListItem {
+    0%   {
+	max-height: 0;
+        margin:0;
+    }
+    100% {
+    }
+}
+
+@-webkit-keyframes closeLeftWrapper {
+    0%   {
+	opacity:1;
+    }
+    100% {
+	opacity:0;
+    }
+}
+
+@-webkit-keyframes openLeftWrapper {
+    0%   {
+	opacity:0;
+    }
+    100% {
+	opacity:1;
+    }
+}
+
+/**
+ * Messages on top mid
+ *
+ */
+@-webkit-keyframes closeTopListItem {
+    0%   {
+    }
+    100% {
+	max-height: 0;
+        margin:0;
+    }
+}
+
+@-webkit-keyframes openTopListItem {
+    0%   {
+	max-height: 0;
+        margin:0;
+    }
+    100% {
+    }
+}
+
+@-webkit-keyframes closeTopWrapper {
+    0%   {
+	opacity:1;
+    }
+    100% {
+	opacity:0;
+    }
+}
+
+@-webkit-keyframes openTopWrapper {
+    0%   {
+	opacity:0;
+    }
+    100% {
+	opacity:1;
+    }
+}
+
+
+/**
+ * Messages on bottom mid
+ *
+ */
+@-webkit-keyframes closeBottomListItem {
+    0%   {
+    }
+    100% {
+	max-height: 0;
+        margin:0;
+    }
+}
+
+@-webkit-keyframes openBottomListItem {
+    0%   {
+	max-height: 0;
+        margin:0;
+    }
+    100% {
+    }
+}
+
+@-webkit-keyframes closeBottomWrapper {
+    0%   {
+	opacity:1;
+    }
+    100% {
+	opacity:0;
+    }
+}
+
+@-webkit-keyframes openBottomWrapper {
+    0%   {
+	opacity:0;
+    }
+    100% {
+	opacity:1;
+    }
+}
+/**
+ * Messages aligned on RHS of screen
+ * 
+ */
+
+
+@-moz-keyframes closeRightListItem {
+    0%   {
+    }
+    100% {
+	max-height: 0;
+        margin:0;
+    }
+}
+
+
+@-moz-keyframes openRightListItem {
+    0%   {
+	max-height: 0;
+        margin:0;
+    }
+    100% {
+    }
+}
+
+@-moz-keyframes closeRightWrapper {
+    0%   {
+	opacity:1;
+    }
+    100% {
+	opacity:0;
+    }
+}
+
+@-moz-keyframes openRightWrapper {
+    0%   {
+	opacity:0;
+    }
+    100% {
+	opacity:1;
+    }
+}
+
+
+/**
+ * Messages aligned on LHS of screen
+ *
+ */
+@-moz-keyframes closeLeftListItem {
+    0%   {
+    }
+    100% {
+	max-height: 0;
+        margin:0;
+    }
+}
+
+@-moz-keyframes openLeftListItem {
+    0%   {
+	max-height: 0;
+        margin:0;
+    }
+    100% {
+    }
+}
+
+@-moz-keyframes closeLeftWrapper {
+    0%   {
+	opacity:1;
+    }
+    100% {
+	opacity:0;
+    }
+}
+
+@-moz-keyframes openLeftWrapper {
+    0%   {
+	opacity:0;
+    }
+    100% {
+	opacity:1;
+    }
+}
+
+/**
+ * Messages on top mid
+ *
+ */
+@-moz-keyframes closeTopListItem {
+    0%   {
+    }
+    100% {
+	max-height: 0;
+        margin:0;
+    }
+}
+
+@-moz-keyframes openTopListItem {
+    0%   {
+	max-height: 0;
+        margin:0;
+    }
+    100% {
+    }
+}
+
+@-moz-keyframes closeTopWrapper {
+    0%   {
+	opacity:1;
+    }
+    100% {
+	opacity:0;
+    }
+}
+
+@-moz-keyframes openTopWrapper {
+    0%   {
+	opacity:0;
+    }
+    100% {
+	opacity:1;
+    }
+}
+
+
+/**
+ * Messages on bottom mid
+ *
+ */
+@-moz-keyframes closeBottomListItem {
+    0%   {
+    }
+    100% {
+	max-height: 0;
+        margin:0;
+    }
+}
+
+@-moz-keyframes openBottomListItem {
+    0%   {
+	max-height: 0;
+        margin:0;
+    }
+    100% {
+    }
+}
+
+@-moz-keyframes closeBottomWrapper {
+    0%   {
+	opacity:1;
+    }
+    100% {
+	opacity:0;
+    }
+}
+
+@-moz-keyframes openBottomWrapper {
+    0%   {
+	opacity:0;
+    }
+    100% {
+	opacity:1;
+    }
+}
+/**
+ * Messages aligned on RHS of screen
+ * 
+ */
+
+
+@keyframes closeRightListItem {
+    0%   {
+    }
+    100% {
+	max-height: 0;
+        margin:0;
+    }
+}
+
+
+@keyframes openRightListItem {
+    0%   {
+	max-height: 0;
+        margin:0;
+    }
+    100% {
+    }
+}
+
+@keyframes closeRightWrapper {
+    0%   {
+	opacity:1;
+    }
+    100% {
+	opacity:0;
+    }
+}
+
+@keyframes openRightWrapper {
+    0%   {
+	opacity:0;
+    }
+    100% {
+	opacity:1;
+    }
+}
+
+
+/**
+ * Messages aligned on LHS of screen
+ *
+ */
+@keyframes closeLeftListItem {
+    0%   {
+    }
+    100% {
+	max-height: 0;
+        margin:0;
+    }
+}
+
+@keyframes openLeftListItem {
+    0%   {
+	max-height: 0;
+        margin:0;
+    }
+    100% {
+    }
+}
+
+@keyframes closeLeftWrapper {
+    0%   {
+	opacity:1;
+    }
+    100% {
+	opacity:0;
+    }
+}
+
+@keyframes openLeftWrapper {
+    0%   {
+	opacity:0;
+    }
+    100% {
+	opacity:1;
+    }
+}
+
+/**
+ * Messages on top mid
+ *
+ */
+@keyframes closeTopListItem {
+    0%   {
+    }
+    100% {
+	max-height: 0;
+        margin:0;
+    }
+}
+
+@keyframes openTopListItem {
+    0%   {
+	max-height: 0;
+        margin:0;
+    }
+    100% {
+    }
+}
+
+@keyframes closeTopWrapper {
+    0%   {
+	opacity:1;
+    }
+    100% {
+	opacity:0;
+    }
+}
+
+@keyframes openTopWrapper {
+    0%   {
+	opacity:0;
+    }
+    100% {
+	opacity:1;
+    }
+}
+
+
+/**
+ * Messages on bottom mid
+ *
+ */
+@keyframes closeBottomListItem {
+    0%   {
+    }
+    100% {
+	max-height: 0;
+        margin:0;
+    }
+}
+
+@keyframes openBottomListItem {
+    0%   {
+	max-height: 0;
+        margin:0;
+    }
+    100% {
+    }
+}
+
+@keyframes closeBottomWrapper {
+    0%   {
+	opacity:1;
+    }
+    100% {
+	opacity:0;
+    }
+}
+
+@keyframes openBottomWrapper {
+    0%   {
+	opacity:0;
+    }
+    100% {
+	opacity:1;
+    }
+}

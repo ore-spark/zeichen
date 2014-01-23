@@ -44,7 +44,8 @@ $list-bl-left: .3rem;
 $list-bl-bottom: .3rem;
 
 /*listItem li customizations*/
-$listItem-margin:1rem 0rem 0rem 0rem;
+$listItem-top-margin:0rem 0rem 1rem 0rem;
+$listItem-bottom-margin:1rem 0rem 0rem 0rem;
 $listItem-animation-iteration-count: 1;
 $listItem-animation-direction: normal;
 $listItem-animation-timing-function: ease-out;
@@ -52,8 +53,8 @@ $listItem-animation-fill-mode: forwards;
 $listItem-animation-delay-showing: 0s;
 $listItem-animation-duration-showing: .5s;
 $listItem-animation-delay-hiding: 0s;
-$listItem-animation-duration-hiding: .3s;
-$listItem-transform-origin: 0% 0%;
+$listItem-animation-duration-hiding: .5s;
+$listItem-transform-origin: 0% 50%;
 
 /*icon customizations */
 $icon-left-position:1rem;
@@ -65,17 +66,19 @@ $close-right-position:1rem;
 /*content-wrapper div customizations */
 //$contentWrapper-margin:1rem 0rem 1rem 0rem;
 $contentWrapper-margin:0rem;
+$contentWrapper-transition:background-color .3s ease-in;
 $contentWrapper-animation-iteration-count: 1;
 $contentWrapper-animation-direction: normal;
 $contentWrapper-animation-timing-function: ease-out;
 $contentWrapper-animation-fill-mode: forwards;
 $contentWrapper-animation-delay-showing: 0s;
-$contentWrapper-animation-duration-showing: .3s;
+$contentWrapper-animation-duration-showing: .5s;
 $contentWrapper-animation-delay-hiding: 0s;
 $contentWrapper-animation-duration-hiding: .5s;
 $contentWrapper-top-transform-origin: 0% 0%;
 $contentWrapper-bottom-transform-origin: 0% 100%;
 $contentWrapper-box-shadow: 0px 0px 4px 2px #ccc;
+$contentWrapper-text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
 $contentWrapper-border-radius: .5rem;
 
 /*content div customizations */
@@ -97,9 +100,9 @@ $info-bg-color-hover:#007ba0;
  * A simple bash script can generate all 3 prefixed sheets from one
  */ 
 
-@import 'zeichen_keyframes_moz';
-@import 'zeichen_keyframes_webkit';
-@import 'zeichen_keyframes_nopre';
+//@import 'zeichen_keyframes_moz';
+//@import 'zeichen_keyframes_webkit';
+//@import 'zeichen_keyframes_nopre';
 
 /*
  * MEDIA QUERIES =============================
@@ -154,7 +157,18 @@ $info-bg-color-hover:#007ba0;
     box-sizing:border-box;
     -moz-box-sizing:border-box;
     padding:0;
-    margin:$listItem-margin;
+}
+
+#{$id-prefix}-tm #{$class-prefix}-list-item,
+#{$id-prefix}-tr #{$class-prefix}-list-item,
+#{$id-prefix}-tl #{$class-prefix}-list-item{
+    margin:$listItem-top-margin;
+}
+
+#{$id-prefix}-bm #{$class-prefix}-list-item,
+#{$id-prefix}-br #{$class-prefix}-list-item,
+#{$id-prefix}-bl #{$class-prefix}-list-item{
+    margin:$listItem-bottom-margin;
 }
 
 #{$id-prefix}-tm #{$class-prefix}-list-item.showing{
@@ -233,7 +247,9 @@ $info-bg-color-hover:#007ba0;
     box-sizing:border-box;
     -moz-box-sizing:border-box;
     box-shadow:$contentWrapper-box-shadow;
+    text-shadow:$contentWrapper-text-shadow;
     border-radius:$contentWrapper-border-radius;
+    transition:$contentWrapper-transition;
     width:100%;
     opacity:0;
 }

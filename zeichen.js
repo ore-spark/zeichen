@@ -86,7 +86,7 @@
                  var opts = {
                      autoDismiss: false, //automatically dismiss alerts
                      tapDismiss: true, //dismiss alert on click/tap of the content
-                     hoverRecover: false, //hovering over an autodismissed message while its fading restores it
+                     hoverRecover: true, //hovering over an autodismissed message while its fading restores it
                      iconAutoCenter: true, //auto center the icon in the div
                      iconShow: true, //show/hide status icon
                      closeShow: true, //show/hide close input
@@ -97,9 +97,9 @@
                      listItemActionTrigger: 'click', //trigger passed to jquery on method
                      listItemActionCallback: function(){}, //callback to fire on a user action
                      listItemLifetime: 7000, //time in ms until we start the fade/ removal animation steps
-                     listItemShowDuration: 450, //time in ms for list item to animate before wrapper show begins
+                     listItemShowDuration: 250, //time in ms for list item to animate before wrapper show begins
                      listItemHideDuration: 500, //time in ms for list item to animate before item is destroyed
-                     contentWrapperHideDuration: 500, //time in ms for content to animate before list item hide starts
+                     contentWrapperHideDuration: 0, //time in ms for content to animate before list item hide starts
                      
                      /* TEMPLATE OPTS */
                      listTpl: listTpl,
