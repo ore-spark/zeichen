@@ -54,7 +54,7 @@
                  
                  /**
                   * Close Template
-                  * - Conatiner, classes, and html for the close icon. We listen for *[data-zeichen-close] for our close handler
+                  * - Container, classes, and html for the close icon. We listen for *[data-zeichen-close] for our close handler
                   */
                  var closeTpl = '<a href="#" class="{{closeClass}} {{closeClassExt}} " data-zeichen-close>{{closeText}}</a>';
 
@@ -65,19 +65,19 @@
                   */
                  var iconTpl = '<div class="{{iconClass}} {{iconClassExt}} " data-zeichen-icon>{{iconText}}</div>';
 
-                 //Message template for custom content layouts
-                 /**
-                  * Message Template
-                  * - Template that defines the structure of the content.
-                  * - Only used if the first parameter of our public functions is an object
-                  */
-                 var messageTpl = '<h3>{{heading}}</h3><p>{{body}}</p>';                 
-
                  /**
                   * Contents Template
                   * - Template that houses the rendered message
                   */
                  var contentTpl = '<div class="{{contentClass}} {{type}} {{contentClassExt}} ">{{messageRender}}</div>';
+
+                 //Message template for custom content layouts
+                 /**
+                  * Message Template
+                  * - Template that defines the structure of the message
+                  * - Only used if the first parameter of our public functions is an object
+                  */
+                 var messageTpl = '<h3>{{heading}}</h3><p>{{body}}</p>';                 
                  
                  
                  //default options
@@ -93,6 +93,7 @@
                      listPosition: 'fixed', // string : css position of a notification container
                      listPlacement: 'tr', // string : default placement bl: bottom left, tm: top middle, etc
                      listZIndex: 100, // string/int : css z-index value for the notification container
+                     listItemWidth: '100%', // string : css width value for the listItem
                      listItemActionTrigger: 'click', // string : jquery action to which listItemCallback is bound
                      listItemActionCallback: function($listItem){}, // function : callback that fires on listItemActionTrigger
                      listItemLifetime: 7000, // int : time in ms before the contentWrapper hide animation begins
@@ -274,7 +275,7 @@
                      if(opts.listPlacement.match(/t/g))
                          $listItem.prependTo($list);
                      if(opts.listPlacement.match(/b/g))
-                         $listItem.appendTo($list);
+                         $listItem.appendTo($list);                     
 
                      opts.drawCallback(message, $listItem);
                      
@@ -294,7 +295,8 @@
                      
                      // Accurately set max height so our animations dont look like shit.
                      $listItem.css({
-                         'max-height': wrapper_height+'px'
+                         'max-height': wrapper_height+'px',
+                         'width': opts.listItemWidth,
                      });
 
                      
@@ -388,6 +390,7 @@
 
                      //bind the tap/click dismiss listener if set
                      if(opts.tapDismiss){
+                         $listItem.css({cursor: 'pointer'});
                          $listItem.on('click', function(e){
                              e.preventDefault();
                              $listItem.unbind('mouseenter');
@@ -414,6 +417,6 @@
          }
         );
 })(function(deps, factory){
-    var zeichen = factory(window['jQuery']);
-    window['zeichen'] = zeichen;
+    var zeichen = factory(window.jQuery);
+    window.zeichen = zeichen;
 });

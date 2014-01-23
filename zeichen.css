@@ -75,7 +75,6 @@
 .zeichen-list-item {
   position: relative;
   width: 100%;
-  max-width: 100%;
   max-height: 0;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -179,6 +178,8 @@
   -webkit-transform-origin: 0% 100%;
   -moz-transform-origin: 0% 100%; }
 
+[data-zeichen-list="tr"] [data-zeichen-list-item], [data-zeichen-list="br"] [data-zeichen-list-item] {
+  float: right; }
 [data-zeichen-list="tr"] [data-zeichen-list-item].showing, [data-zeichen-list="br"] [data-zeichen-list-item].showing {
   -webkit-animation-name: openRightListItem;
   -moz-animation-name: openRightListItem; }
@@ -205,6 +206,8 @@
   -webkit-animation-name: closeTopWrapper;
   -moz-animation-name: closeTopWrapper; }
 
+[data-zeichen-list="tl"] [data-zeichen-list-item], [data-zeichen-list="bl"] [data-zeichen-list-item] {
+  float: left; }
 [data-zeichen-list="tl"] [data-zeichen-list-item].showing, [data-zeichen-list="bl"] [data-zeichen-list-item].showing {
   -webkit-animation-name: openLeftListItem;
   -moz-animation-name: openLeftListItem; }

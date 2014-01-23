@@ -162,7 +162,6 @@ $info-bg-color-hover:#007ba0;
 #{$class-prefix}-list-item{    
     position:relative;
     width:100%;
-    max-width:100%;
     max-height:0;
     box-sizing:border-box;
     -moz-box-sizing:border-box;
@@ -290,6 +289,9 @@ $info-bg-color-hover:#007ba0;
 }
 
 [data-zeichen-list="tr"], [data-zeichen-list="br"]{
+    [data-zeichen-list-item]{
+        float:right;
+    }
     [data-zeichen-list-item].showing{
         -webkit-animation-name: openRightListItem;
         -moz-animation-name: openRightListItem;
@@ -328,6 +330,9 @@ $info-bg-color-hover:#007ba0;
 }
 
 [data-zeichen-list="tl"], [data-zeichen-list="bl"]{
+    [data-zeichen-list-item]{
+        float:left;
+    }
     [data-zeichen-list-item].showing{
         -webkit-animation-name: openLeftListItem;
         -moz-animation-name: openLeftListItem;

@@ -53,6 +53,7 @@ zeichen.options.autoDismiss = true;
 ##All Options
 
 ```javascript
+
 var opts = {
     autoDismiss: false, // bool : dismiss notification after listItemLifetime
     tapDismiss: true, // bool : dismiss notification on click/tap 
@@ -65,15 +66,16 @@ var opts = {
     listPosition: 'fixed', // string : css position of a notification container
     listPlacement: 'tr', // string : default placement bl: bottom left, tm: top middle, etc
     listZIndex: 100, // string/int : css z-index value for the notification container
+    listItemWidth: '100%', // string : css width value for the listItem
     listItemActionTrigger: 'click', // string : jquery action to which listItemCallback is bound
     listItemActionCallback: function($listItem){}, // function : callback that fires on listItemActionTrigger
     listItemLifetime: 7000, // int : time in ms before the contentWrapper hide animation begins
     listItemShowDuration: 500, // int : time in ms for listItem to animate before the contentWrapper show animation begins
     listItemHideDuration: 500, // int : time in ms for listItem to animate before the listItem is removed from dom
-    contentWrapperHideDuration: 500, // int : time in ms for contentWrapper to animate before listItem hide animation starts   
- 
+    contentWrapperHideDuration: 500, // int : time in ms for contentWrapper to animate before listItem hide animation starts
+    
     /* TEMPLATE OPTS */
-    templateEngine: QuickEngine, // object : the templating engine. Used like opts.templateEngine.compile(template).render(context)
+    templateEngine: QuickEngine, // object : the templating engine. Used like content = opts.templateEngine.compile(template).render(context)
     listTpl: listTpl, // string : template for data-zeichen-list
     listItemTpl: listItemTpl, // string : template for data-zeichen-list-item. Should nest data-zeichen-content-wrapper
     iconTpl: iconTpl, // string : template for data-zeichen-icon
@@ -107,5 +109,5 @@ var opts = {
     iconClassExt: iconClassExt,
     contentClassExt: contentClassExt,
     closeClassExt: closeClassExt,
-};     
+};
 ```
