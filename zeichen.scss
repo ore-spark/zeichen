@@ -41,7 +41,7 @@ $list-br-right: .3rem;
 $list-br-bottom: .3rem;
 
 $list-bl-left: .3rem;
-$list-bl-bottom: .3rem;
+$list-bl-bottom: .6rem;
 
 /*listItem li customizations*/
 $listItem-top-margin:0rem 0rem 1rem 0rem;
@@ -95,20 +95,10 @@ $info-bg-color:#008cba;
 $info-bg-color-hover:#007ba0;
 
 /*
- * KEYFRAMES =================================
- * Yeah this is a shitty way to do this, but it works. 
- * A simple bash script can generate all 3 prefixed sheets from one
- */ 
-
-//@import 'zeichen_keyframes_moz';
-//@import 'zeichen_keyframes_webkit';
-//@import 'zeichen_keyframes_nopre';
-
-/*
  * MEDIA QUERIES =============================
  */
 @media screen and (max-width: $small-media-break) {
-    #{$class-prefix}-list{	     
+    [data-zeichen-list]{	     
 	width:100%;
         right:0;
         left:0;
@@ -116,16 +106,17 @@ $info-bg-color-hover:#007ba0;
 }
 
 @media screen and (min-width: $small-media-break) {
-    #{$class-prefix}-list{
+    [data-zeichen-list]{
 	width:$large-max-width;
     }
 }
 
 
 /*
- * AN AWFUL MESS =============================
+ * LIST RULES
  */
-#{$class-prefix}-list{
+
+[data-zeichen-list]{
     padding:0;
     margin:0;
     list-style:none;
@@ -133,23 +124,43 @@ $info-bg-color-hover:#007ba0;
     -moz-box-sizing:border-box;
 }
 
-#{$class-prefix}-list-item{
-    -webkit-animation-duration: $listItem-animation-duration-showing;
-    -webkit-animation-delay: $listItem-animation-delay-showing;
-    -webkit-animation-iteration-count: $listItem-animation-iteration-count;
-    -webkit-animation-direction: $listItem-animation-direction;
-    -webkit-animation-timing-function: $listItem-animation-timing-function;
-    -webkit-animation-fill-mode: $listItem-animation-fill-mode;
-    -webkit-transform-origin: $listItem-transform-origin;
+[data-zeichen-list="tl"]{
+    top:$list-tl-top;
+    left:$list-tl-left;
+}
 
-    -moz-animation-duration: $listItem-animation-duration-showing;
-    -moz-animation-delay: $listItem-animation-delay-showing;
-    -moz-animation-iteration-count: $listItem-animation-iteration-count;
-    -moz-animation-direction: $listItem-animation-direction;
-    -moz-animation-timing-function: $listItem-animation-timing-function;
-    -moz-animation-fill-mode: $listItem-animation-fill-mode;
-    -moz-transform-origin: $listItem-transform-origin;
-    
+[data-zeichen-list="tm"]{
+    top:$list-tm-top;
+    left:$list-tm-left;
+    width:$list-tm-width;
+}
+
+[data-zeichen-list="tr"]{
+    top:$list-tr-top;
+    right:$list-tr-right;
+}
+
+[data-zeichen-list="bl"]{
+    bottom:$list-bl-bottom;
+    left:$list-bl-left;
+}
+
+[data-zeichen-list="bm"]{
+    bottom:$list-bm-bottom;
+    left:$list-bm-left;
+    width:$list-bm-width
+}
+
+[data-zeichen-list="br"]{
+    bottom:$list-br-bottom;
+    right:$list-br-right;
+}
+
+/*
+ * LIST ITEM & CONTENT WRAPPER RULES
+ */
+
+#{$class-prefix}-list-item{    
     position:relative;
     width:100%;
     max-width:100%;
@@ -159,89 +170,32 @@ $info-bg-color-hover:#007ba0;
     padding:0;
 }
 
-#{$id-prefix}-tm #{$class-prefix}-list-item,
-#{$id-prefix}-tr #{$class-prefix}-list-item,
-#{$id-prefix}-tl #{$class-prefix}-list-item{
-    margin:$listItem-top-margin;
+[data-zeichen-list-item]{
+    -webkit-animation-duration: $listItem-animation-duration-showing;
+    -webkit-animation-delay: $listItem-animation-delay-showing;
+    -webkit-animation-iteration-count: $listItem-animation-iteration-count;
+    -webkit-animation-direction: $listItem-animation-direction;
+    -webkit-animation-timing-function: $listItem-animation-timing-function;
+    -webkit-animation-fill-mode: $listItem-animation-fill-mode;
+    -webkit-transform-origin: $listItem-transform-origin;
+    
+    -moz-animation-duration: $listItem-animation-duration-showing;
+    -moz-animation-delay: $listItem-animation-delay-showing;
+    -moz-animation-iteration-count: $listItem-animation-iteration-count;
+    -moz-animation-direction: $listItem-animation-direction;
+    -moz-animation-timing-function: $listItem-animation-timing-function;
+    -moz-animation-fill-mode: $listItem-animation-fill-mode;
+    -moz-transform-origin: $listItem-transform-origin;    
 }
 
-#{$id-prefix}-bm #{$class-prefix}-list-item,
-#{$id-prefix}-br #{$class-prefix}-list-item,
-#{$id-prefix}-bl #{$class-prefix}-list-item{
-    margin:$listItem-bottom-margin;
-}
-
-#{$id-prefix}-tm #{$class-prefix}-list-item.showing{
-    -webkit-animation-name: openTopListItem;
-    -moz-animation-name: openTopListItem;
-}
-
-#{$id-prefix}-bm #{$class-prefix}-list-item.showing{
-    -webkit-animation-name: openBottomListItem;
-    -moz-animation-name: openBottomListItem;
-}
-
-#{$id-prefix}-tl #{$class-prefix}-list-item.showing,
-#{$id-prefix}-bl #{$class-prefix}-list-item.showing{
-    -webkit-animation-name: openLeftListItem;
-    -moz-animation-name: openLeftListItem;
-}
-
-#{$id-prefix}-tr #{$class-prefix}-list-item.showing,
-#{$id-prefix}-br #{$class-prefix}-list-item.showing{
-    -webkit-animation-name: openRightListItem;
-    -moz-animation-name: openRightListItem;
-}
-
-#{$id-prefix}-tm #{$class-prefix}-list-item.hiding{
-    -webkit-animation-name: closeTopListItem;
+[data-zeichen-list-item].hiding{
     -webkit-animation-duration: $listItem-animation-duration-hiding;
     -webkit-animation-delay: $listItem-animation-delay-hiding;
-    -moz-animation-name: closeTopListItem;
-    -moz-animation-duration: $listItem-animation-duration-hiding;
-    -moz-animation-delay: $listItem-animation-delay-hiding;
-}
-
-#{$id-prefix}-bm #{$class-prefix}-list-item.hiding{
-    -webkit-animation-name: closeBottomListItem;
-    -webkit-animation-duration: $listItem-animation-duration-hiding;
-    -webkit-animation-delay: $listItem-animation-delay-hiding;
-    -moz-animation-name: closeBottomListItem;
-    -moz-animation-duration: $listItem-animation-duration-hiding;
-    -moz-animation-delay: $listItem-animation-delay-hiding;
-}
-
-#{$id-prefix}-tl #{$class-prefix}-list-item.hiding,
-#{$id-prefix}-bl #{$class-prefix}-list-item.hiding{
-    -webkit-animation-name: closeLeftListItem;
-    -webkit-animation-duration: $listItem-animation-duration-hiding;
-    -webkit-animation-delay: $listItem-animation-delay-hiding;
-    -moz-animation-name: closeLeftListItem;
-    -moz-animation-duration: $listItem-animation-duration-hiding;
-    -moz-animation-delay: $listItem-animation-delay-hiding;
-}
-
-#{$id-prefix}-tr #{$class-prefix}-list-item.hiding,
-#{$id-prefix}-br #{$class-prefix}-list-item.hiding{
-    -webkit-animation-name: closeRightListItem;
-    -webkit-animation-duration: $listItem-animation-duration-hiding;
-    -webkit-animation-delay: $listItem-animation-delay-hiding;
-    -moz-animation-name: closeRightListItem;
     -moz-animation-duration: $listItem-animation-duration-hiding;
     -moz-animation-delay: $listItem-animation-delay-hiding;
 }
 
 #{$class-prefix}-content-wrapper{
-    -webkit-animation-iteration-count: $contentWrapper-animation-iteration-count;
-    -webkit-animation-direction: $contentWrapper-animation-direction;
-    -webkit-animation-timing-function: $contentWrapper-animation-timing-function;
-    -webkit-animation-fill-mode: $contentWrapper-animation-fill-mode;
-
-    -moz-animation-iteration-count: $contentWrapper-animation-iteration-count;
-    -moz-animation-direction: $contentWrapper-animation-direction;
-    -moz-animation-timing-function: $contentWrapper-animation-timing-function;
-    -moz-animation-fill-mode: $contentWrapper-animation-fill-mode;
-
     padding:0;
     margin:$contentWrapper-margin;
     box-sizing:border-box;
@@ -254,51 +208,59 @@ $info-bg-color-hover:#007ba0;
     opacity:0;
 }
 
-#{$class-prefix}-content-wrapper.showing{
+[data-zeichen-content-wrapper].success{
+    background-color:$success-bg-color;
+    border:1px solid $success-bg-color-hover;
+    &:hover{
+        background-color:$success-bg-color-hover;
+    }
+}
+
+[data-zeichen-content-wrapper].warning{
+    background-color:$warning-bg-color;
+    border:1px solid $warning-bg-color-hover;
+    &:hover{
+        background-color:$warning-bg-color-hover;
+    }
+}
+
+[data-zeichen-content-wrapper].error{
+    background-color:$error-bg-color;
+    border:1px solid $error-bg-color-hover;
+    &:hover{
+        background-color:$error-bg-color-hover;
+    }
+}
+
+[data-zeichen-content-wrapper].info{
+    background-color:$info-bg-color;
+    border:1px solid $info-bg-color-hover;
+    &:hover{
+        background-color:$info-bg-color-hover;
+    }
+}
+
+[data-zeichen-content-wrapper]{
+    -webkit-animation-iteration-count: $contentWrapper-animation-iteration-count;
+    -webkit-animation-direction: $contentWrapper-animation-direction;
+    -webkit-animation-timing-function: $contentWrapper-animation-timing-function;
+    -webkit-animation-fill-mode: $contentWrapper-animation-fill-mode;
+    
+    -moz-animation-iteration-count: $contentWrapper-animation-iteration-count;
+    -moz-animation-direction: $contentWrapper-animation-direction;
+    -moz-animation-timing-function: $contentWrapper-animation-timing-function;
+    -moz-animation-fill-mode: $contentWrapper-animation-fill-mode;
+}
+
+[data-zeichen-content-wrapper].showing{
     -webkit-animation-duration: $contentWrapper-animation-duration-showing;
     -webkit-animation-delay: $contentWrapper-animation-delay-showing;
-
+    
     -moz-animation-duration: $contentWrapper-animation-duration-showing;
     -moz-animation-delay: $contentWrapper-animation-delay-showing;
 }
 
-#{$id-prefix}-tm #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.showing{
-    -webkit-animation-name: openTopWrapper;
-    -moz-animation-name: openTopWrapper;
-}
-
-#{$id-prefix}-bm #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.showing{
-    -webkit-animation-name: openBottomWrapper;
-    -moz-animation-name: openBottomWrapper;
-}
-
-#{$id-prefix}-tl #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.showing,
-#{$id-prefix}-bl #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.showing{
-    -webkit-animation-name: openLeftWrapper;
-    -moz-animation-name: openLeftWrapper;
-}
-
-#{$id-prefix}-tr #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.showing,
-#{$id-prefix}-br #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.showing{
-    -webkit-animation-name: openRightWrapper;
-    -moz-animation-name: openRightWrapper;
-}
-
-#{$id-prefix}-tr #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.showing,
-#{$id-prefix}-tl #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.showing,
-#{$id-prefix}-tm #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.showing{
-    -webkit-transform-origin: $contentWrapper-top-transform-origin;
-    -moz-transform-origin: $contentWrapper-top-transform-origin;
-}
-
-#{$id-prefix}-br #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.showing,
-#{$id-prefix}-bl #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.showing,
-#{$id-prefix}-bm #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.showing{
-    -webkit-transform-origin: $contentWrapper-bottom-transform-origin;
-    -moz-transform-origin: $contentWrapper-bottom-transform-origin;
-}
-
-#{$class-prefix}-content-wrapper.hiding{
+[data-zeichen-content-wrapper].hiding{
     -webkit-animation-duration: $contentWrapper-animation-duration-hiding;
     -webkit-animation-delay: $contentWrapper-animation-delay-hiding;
 
@@ -306,41 +268,110 @@ $info-bg-color-hover:#007ba0;
     -moz-animation-delay: $contentWrapper-animation-delay-hiding;
 }
 
-#{$id-prefix}-tm #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.hiding{
-    -webkit-animation-name: closeTopWrapper;
-    -moz-animation-name: closeTopWrapper;
-
+[data-zeichen-list="tl"], [data-zeichen-list="tm"], [data-zeichen-list="tr"]{    
+    [data-zeichen-list-item]{
+        margin:$listItem-top-margin;
+    }
+    [data-zeichen-list-item] [data-zeichen-content-wrapper].showing,
+    [data-zeichen-list-item] [data-zeichen-content-wrapper].hiding{
+        -webkit-transform-origin: $contentWrapper-top-transform-origin;
+        -moz-transform-origin: $contentWrapper-top-transform-origin;
+    }
 }
 
-#{$id-prefix}-bm #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.hiding{
-    -webkit-animation-name: closeBottomWrapper;
-    -moz-animation-name: closeBottomWrapper;
+[data-zeichen-list="bl"], [data-zeichen-list="bm"], [data-zeichen-list="br"]{
+    [data-zeichen-list-item]{
+        margin:$listItem-bottom-margin;
+    }
+    [data-zeichen-list-item] [data-zeichen-content-wrapper].showing,
+    [data-zeichen-list-item] [data-zeichen-content-wrapper].hiding{
+        -webkit-transform-origin: $contentWrapper-bottom-transform-origin;
+        -moz-transform-origin: $contentWrapper-bottom-transform-origin;
+    }
 }
 
-#{$id-prefix}-tl #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.hiding,
-#{$id-prefix}-bl #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.hiding{
-    -webkit-animation-name: closeLeftWrapper;
-    -moz-animation-name: closeLeftWrapper;
+[data-zeichen-list="tr"], [data-zeichen-list="br"]{
+    [data-zeichen-list-item].showing{
+        -webkit-animation-name: openRightListItem;
+        -moz-animation-name: openRightListItem;
+    }
+    [data-zeichen-list-item].hiding{
+        -webkit-animation-name: closeRightListItem;
+        -moz-animation-name: closeRightListItem;
+    }
+    [data-zeichen-list-item] [data-zeichen-content-wrapper].showing{
+        -webkit-animation-name: openRightWrapper;
+        -moz-animation-name: openRightWrapper;
+    }
+    [data-zeichen-list-item] [data-zeichen-content-wrapper].hiding{
+        -webkit-animation-name: closeRightWrapper;
+        -moz-animation-name: closeRightWrapper;
+    }
 }
 
-#{$id-prefix}-tr #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.hiding,
-#{$id-prefix}-br #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.hiding{
-    -webkit-animation-name: closeRightWrapper;
-    -moz-animation-name: closeRightWrapper;
+[data-zeichen-list="tm"]{
+    [data-zeichen-list-item].showing{
+        -webkit-animation-name: openTopListItem;
+        -moz-animation-name: openTopListItem;
+    }
+    [data-zeichen-list-item].hiding{
+        -webkit-animation-name: closeTopListItem;
+        -moz-animation-name: closeTopListItem;
+    }
+    [data-zeichen-list-item] [data-zeichen-content-wrapper].showing{
+        -webkit-animation-name: openTopWrapper;
+        -moz-animation-name: openTopWrapper;
+    }
+    [data-zeichen-list-item] [data-zeichen-content-wrapper].hiding{
+        -webkit-animation-name: closeTopWrapper;
+        -moz-animation-name: closeTopWrapper;
+    }
 }
 
-#{$id-prefix}-tr #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.hiding,
-#{$id-prefix}-tl #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.hiding,
-#{$id-prefix}-tm #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.hiding{
-    -webkit-transform-origin: $contentWrapper-top-transform-origin;
-    -moz-transform-origin: $contentWrapper-top-transform-origin;
+[data-zeichen-list="tl"], [data-zeichen-list="bl"]{
+    [data-zeichen-list-item].showing{
+        -webkit-animation-name: openLeftListItem;
+        -moz-animation-name: openLeftListItem;
+    }
+    [data-zeichen-list-item].hiding{
+        -webkit-animation-name: closeLeftListItem;
+        -moz-animation-name: closeLeftListItem;
+    }
+    [data-zeichen-list-item] [data-zeichen-content-wrapper].showing{
+        -webkit-animation-name: openLeftWrapper;
+        -moz-animation-name: openLeftWrapper;
+    }
+    [data-zeichen-list-item] [data-zeichen-content-wrapper].hiding{
+        -webkit-animation-name: closeLeftWrapper;
+        -moz-animation-name: closeLeftWrapper;
+    }
 }
 
-#{$id-prefix}-br #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.hiding,
-#{$id-prefix}-bl #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.hiding,
-#{$id-prefix}-bm #{$class-prefix}-list-item #{$class-prefix}-content-wrapper.hiding{
-    -webkit-transform-origin: $contentWrapper-bottom-transform-origin;
-    -moz-transform-origin: $contentWrapper-bottom-transform-origin;
+[data-zeichen-list="bm"]{
+    [data-zeichen-list-item].showing{
+        -webkit-animation-name: openBottomListItem;
+        -moz-animation-name: openBottomListItem;
+    }
+    [data-zeichen-list-item].hiding{
+        -webkit-animation-name: closeBottomListItem;
+        -moz-animation-name: closeBottomListItem;
+    }
+    [data-zeichen-list-item] [data-zeichen-content-wrapper].showing{
+        -webkit-animation-name: openBottomWrapper;
+        -moz-animation-name: openBottomWrapper;
+    }
+    [data-zeichen-list-item] [data-zeichen-content-wrapper].hiding{
+        -webkit-animation-name: closeBottomWrapper;
+        -moz-animation-name: closeBottomWrapper;
+    }
+}
+
+#{$class-prefix}-close{
+    top:$close-top-position;
+    right:$close-right-position;
+    text-decoration:none;
+    position:absolute;    
+    color:$font-color;
 }
 
 #{$class-prefix}-icon{
@@ -357,80 +388,4 @@ $info-bg-color-hover:#007ba0;
     width:100%;
     color:$font-color;
     padding: $content-padding;
-}
-
-#{$class-prefix}-content-wrapper.success{
-    background-color:$success-bg-color;
-    border:1px solid $success-bg-color-hover;
-}
-
-#{$class-prefix}-content-wrapper.success:hover{
-    background-color:$success-bg-color-hover;
-}
-
-#{$class-prefix}-content-wrapper.warning{
-    background-color:$warning-bg-color;
-    border:1px solid $warning-bg-color-hover;
-}
-
-#{$class-prefix}-content-wrapper.warning:hover{
-    background-color:$warning-bg-color-hover;
-}
-
-#{$class-prefix}-content-wrapper.error{
-    background-color:$error-bg-color;
-    border:1px solid $error-bg-color-hover;
-}
-
-#{$class-prefix}-content-wrapper.error:hover{
-    background-color:$error-bg-color-hover;
-}
-
-#{$class-prefix}-content-wrapper.info{
-    background-color:$info-bg-color;
-    border:1px solid $info-bg-color-hover;
-}
-
-#{$class-prefix}-content-wrapper.info:hover{
-    background-color:$info-bg-color-hover;
-}
-
-#{$class-prefix}-close{
-    top:$close-top-position;
-    right:$close-right-position;
-    text-decoration:none;
-    position:absolute;    
-    color:$font-color;
-}
-
-#{$id-prefix}-tm{
-    top:$list-tm-top;
-    left:$list-tm-left;
-    width:$list-tm-width;
-}
-
-#{$id-prefix}-tl{
-    top:$list-tl-top;
-    left:$list-tl-left;
-}
-
-#{$id-prefix}-tr{
-    top:$list-tr-top;
-    right:$list-tr-right;
-}
-
-#{$id-prefix}-bm{
-    bottom:$list-bm-bottom;
-    left:$list-bm-left;
-    width:$list-bm-width
-}
-
-#{$id-prefix}-bl{
-    bottom:$list-bl-bottom;
-    left:$list-bl-left;
-}
-
-#{$id-prefix}-br{
-    bottom:$list-br-bottom;
-    right:$list-br-right;
 }

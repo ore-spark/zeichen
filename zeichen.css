@@ -23,32 +23,65 @@
 /*content div customizations */
 /*Mode colors*/
 /*
- * KEYFRAMES =================================
- * Yeah this is a shitty way to do this, but it works. 
- * A simple bash script can generate all 3 prefixed sheets from one
- */
-/*
  * MEDIA QUERIES =============================
  */
 @media screen and (max-width: 768px) {
-  .zeichen-list {
+  [data-zeichen-list] {
     width: 100%;
     right: 0;
     left: 0; } }
 @media screen and (min-width: 768px) {
-  .zeichen-list {
+  [data-zeichen-list] {
     width: 25%; } }
 /*
- * AN AWFUL MESS =============================
+ * LIST RULES
  */
-.zeichen-list {
+[data-zeichen-list] {
   padding: 0;
   margin: 0;
   list-style: none;
   box-sizing: border-box;
   -moz-box-sizing: border-box; }
 
+[data-zeichen-list="tl"] {
+  top: 0.3rem;
+  left: 0.3rem; }
+
+[data-zeichen-list="tm"] {
+  top: 0;
+  left: 0;
+  width: 100%; }
+
+[data-zeichen-list="tr"] {
+  top: 0.3rem;
+  right: 0.3rem; }
+
+[data-zeichen-list="bl"] {
+  bottom: 0.6rem;
+  left: 0.3rem; }
+
+[data-zeichen-list="bm"] {
+  bottom: 0;
+  left: 0;
+  width: 100%; }
+
+[data-zeichen-list="br"] {
+  bottom: 0.3rem;
+  right: 0.3rem; }
+
+/*
+ * LIST ITEM & CONTENT WRAPPER RULES
+ */
 .zeichen-list-item {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  max-height: 0;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding: 0; }
+
+[data-zeichen-list-item] {
   -webkit-animation-duration: 0.5s;
   -webkit-animation-delay: 0s;
   -webkit-animation-iteration-count: 1;
@@ -62,86 +95,15 @@
   -moz-animation-direction: normal;
   -moz-animation-timing-function: ease-out;
   -moz-animation-fill-mode: forwards;
-  -moz-transform-origin: 0% 50%;
-  position: relative;
-  width: 100%;
-  max-width: 100%;
-  max-height: 0;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  padding: 0; }
+  -moz-transform-origin: 0% 50%; }
 
-#zeichen-tm .zeichen-list-item,
-#zeichen-tr .zeichen-list-item,
-#zeichen-tl .zeichen-list-item {
-  margin: 0rem 0rem 1rem 0rem; }
-
-#zeichen-bm .zeichen-list-item,
-#zeichen-br .zeichen-list-item,
-#zeichen-bl .zeichen-list-item {
-  margin: 1rem 0rem 0rem 0rem; }
-
-#zeichen-tm .zeichen-list-item.showing {
-  -webkit-animation-name: openTopListItem;
-  -moz-animation-name: openTopListItem; }
-
-#zeichen-bm .zeichen-list-item.showing {
-  -webkit-animation-name: openBottomListItem;
-  -moz-animation-name: openBottomListItem; }
-
-#zeichen-tl .zeichen-list-item.showing,
-#zeichen-bl .zeichen-list-item.showing {
-  -webkit-animation-name: openLeftListItem;
-  -moz-animation-name: openLeftListItem; }
-
-#zeichen-tr .zeichen-list-item.showing,
-#zeichen-br .zeichen-list-item.showing {
-  -webkit-animation-name: openRightListItem;
-  -moz-animation-name: openRightListItem; }
-
-#zeichen-tm .zeichen-list-item.hiding {
-  -webkit-animation-name: closeTopListItem;
+[data-zeichen-list-item].hiding {
   -webkit-animation-duration: 0.5s;
   -webkit-animation-delay: 0s;
-  -moz-animation-name: closeTopListItem;
-  -moz-animation-duration: 0.5s;
-  -moz-animation-delay: 0s; }
-
-#zeichen-bm .zeichen-list-item.hiding {
-  -webkit-animation-name: closeBottomListItem;
-  -webkit-animation-duration: 0.5s;
-  -webkit-animation-delay: 0s;
-  -moz-animation-name: closeBottomListItem;
-  -moz-animation-duration: 0.5s;
-  -moz-animation-delay: 0s; }
-
-#zeichen-tl .zeichen-list-item.hiding,
-#zeichen-bl .zeichen-list-item.hiding {
-  -webkit-animation-name: closeLeftListItem;
-  -webkit-animation-duration: 0.5s;
-  -webkit-animation-delay: 0s;
-  -moz-animation-name: closeLeftListItem;
-  -moz-animation-duration: 0.5s;
-  -moz-animation-delay: 0s; }
-
-#zeichen-tr .zeichen-list-item.hiding,
-#zeichen-br .zeichen-list-item.hiding {
-  -webkit-animation-name: closeRightListItem;
-  -webkit-animation-duration: 0.5s;
-  -webkit-animation-delay: 0s;
-  -moz-animation-name: closeRightListItem;
   -moz-animation-duration: 0.5s;
   -moz-animation-delay: 0s; }
 
 .zeichen-content-wrapper {
-  -webkit-animation-iteration-count: 1;
-  -webkit-animation-direction: normal;
-  -webkit-animation-timing-function: ease-out;
-  -webkit-animation-fill-mode: forwards;
-  -moz-animation-iteration-count: 1;
-  -moz-animation-direction: normal;
-  -moz-animation-timing-function: ease-out;
-  -moz-animation-fill-mode: forwards;
   padding: 0;
   margin: 0rem;
   box-sizing: border-box;
@@ -153,77 +115,128 @@
   width: 100%;
   opacity: 0; }
 
-.zeichen-content-wrapper.showing {
+[data-zeichen-content-wrapper].success {
+  background-color: #43ac6a;
+  border: 1px solid #368a54; }
+  [data-zeichen-content-wrapper].success:hover {
+    background-color: #368a54; }
+
+[data-zeichen-content-wrapper].warning {
+  background-color: #f08a24;
+  border: 1px solid #de770f; }
+  [data-zeichen-content-wrapper].warning:hover {
+    background-color: #de770f; }
+
+[data-zeichen-content-wrapper].error {
+  background-color: #f04124;
+  border: 1px solid #cf280e; }
+  [data-zeichen-content-wrapper].error:hover {
+    background-color: #cf280e; }
+
+[data-zeichen-content-wrapper].info {
+  background-color: #008cba;
+  border: 1px solid #007ba0; }
+  [data-zeichen-content-wrapper].info:hover {
+    background-color: #007ba0; }
+
+[data-zeichen-content-wrapper] {
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-direction: normal;
+  -webkit-animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-direction: normal;
+  -moz-animation-timing-function: ease-out;
+  -moz-animation-fill-mode: forwards; }
+
+[data-zeichen-content-wrapper].showing {
   -webkit-animation-duration: 0.5s;
   -webkit-animation-delay: 0s;
   -moz-animation-duration: 0.5s;
   -moz-animation-delay: 0s; }
 
-#zeichen-tm .zeichen-list-item .zeichen-content-wrapper.showing {
-  -webkit-animation-name: openTopWrapper;
-  -moz-animation-name: openTopWrapper; }
+[data-zeichen-content-wrapper].hiding {
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-delay: 0s;
+  -moz-animation-duration: 0.5s;
+  -moz-animation-delay: 0s; }
 
-#zeichen-bm .zeichen-list-item .zeichen-content-wrapper.showing {
-  -webkit-animation-name: openBottomWrapper;
-  -moz-animation-name: openBottomWrapper; }
-
-#zeichen-tl .zeichen-list-item .zeichen-content-wrapper.showing,
-#zeichen-bl .zeichen-list-item .zeichen-content-wrapper.showing {
-  -webkit-animation-name: openLeftWrapper;
-  -moz-animation-name: openLeftWrapper; }
-
-#zeichen-tr .zeichen-list-item .zeichen-content-wrapper.showing,
-#zeichen-br .zeichen-list-item .zeichen-content-wrapper.showing {
-  -webkit-animation-name: openRightWrapper;
-  -moz-animation-name: openRightWrapper; }
-
-#zeichen-tr .zeichen-list-item .zeichen-content-wrapper.showing,
-#zeichen-tl .zeichen-list-item .zeichen-content-wrapper.showing,
-#zeichen-tm .zeichen-list-item .zeichen-content-wrapper.showing {
+[data-zeichen-list="tl"] [data-zeichen-list-item], [data-zeichen-list="tm"] [data-zeichen-list-item], [data-zeichen-list="tr"] [data-zeichen-list-item] {
+  margin: 0rem 0rem 1rem 0rem; }
+[data-zeichen-list="tl"] [data-zeichen-list-item] [data-zeichen-content-wrapper].showing,
+[data-zeichen-list="tl"] [data-zeichen-list-item] [data-zeichen-content-wrapper].hiding, [data-zeichen-list="tm"] [data-zeichen-list-item] [data-zeichen-content-wrapper].showing,
+[data-zeichen-list="tm"] [data-zeichen-list-item] [data-zeichen-content-wrapper].hiding, [data-zeichen-list="tr"] [data-zeichen-list-item] [data-zeichen-content-wrapper].showing,
+[data-zeichen-list="tr"] [data-zeichen-list-item] [data-zeichen-content-wrapper].hiding {
   -webkit-transform-origin: 0% 0%;
   -moz-transform-origin: 0% 0%; }
 
-#zeichen-br .zeichen-list-item .zeichen-content-wrapper.showing,
-#zeichen-bl .zeichen-list-item .zeichen-content-wrapper.showing,
-#zeichen-bm .zeichen-list-item .zeichen-content-wrapper.showing {
+[data-zeichen-list="bl"] [data-zeichen-list-item], [data-zeichen-list="bm"] [data-zeichen-list-item], [data-zeichen-list="br"] [data-zeichen-list-item] {
+  margin: 1rem 0rem 0rem 0rem; }
+[data-zeichen-list="bl"] [data-zeichen-list-item] [data-zeichen-content-wrapper].showing,
+[data-zeichen-list="bl"] [data-zeichen-list-item] [data-zeichen-content-wrapper].hiding, [data-zeichen-list="bm"] [data-zeichen-list-item] [data-zeichen-content-wrapper].showing,
+[data-zeichen-list="bm"] [data-zeichen-list-item] [data-zeichen-content-wrapper].hiding, [data-zeichen-list="br"] [data-zeichen-list-item] [data-zeichen-content-wrapper].showing,
+[data-zeichen-list="br"] [data-zeichen-list-item] [data-zeichen-content-wrapper].hiding {
   -webkit-transform-origin: 0% 100%;
   -moz-transform-origin: 0% 100%; }
 
-.zeichen-content-wrapper.hiding {
-  -webkit-animation-duration: 0.5s;
-  -webkit-animation-delay: 0s;
-  -moz-animation-duration: 0.5s;
-  -moz-animation-delay: 0s; }
-
-#zeichen-tm .zeichen-list-item .zeichen-content-wrapper.hiding {
-  -webkit-animation-name: closeTopWrapper;
-  -moz-animation-name: closeTopWrapper; }
-
-#zeichen-bm .zeichen-list-item .zeichen-content-wrapper.hiding {
-  -webkit-animation-name: closeBottomWrapper;
-  -moz-animation-name: closeBottomWrapper; }
-
-#zeichen-tl .zeichen-list-item .zeichen-content-wrapper.hiding,
-#zeichen-bl .zeichen-list-item .zeichen-content-wrapper.hiding {
-  -webkit-animation-name: closeLeftWrapper;
-  -moz-animation-name: closeLeftWrapper; }
-
-#zeichen-tr .zeichen-list-item .zeichen-content-wrapper.hiding,
-#zeichen-br .zeichen-list-item .zeichen-content-wrapper.hiding {
+[data-zeichen-list="tr"] [data-zeichen-list-item].showing, [data-zeichen-list="br"] [data-zeichen-list-item].showing {
+  -webkit-animation-name: openRightListItem;
+  -moz-animation-name: openRightListItem; }
+[data-zeichen-list="tr"] [data-zeichen-list-item].hiding, [data-zeichen-list="br"] [data-zeichen-list-item].hiding {
+  -webkit-animation-name: closeRightListItem;
+  -moz-animation-name: closeRightListItem; }
+[data-zeichen-list="tr"] [data-zeichen-list-item] [data-zeichen-content-wrapper].showing, [data-zeichen-list="br"] [data-zeichen-list-item] [data-zeichen-content-wrapper].showing {
+  -webkit-animation-name: openRightWrapper;
+  -moz-animation-name: openRightWrapper; }
+[data-zeichen-list="tr"] [data-zeichen-list-item] [data-zeichen-content-wrapper].hiding, [data-zeichen-list="br"] [data-zeichen-list-item] [data-zeichen-content-wrapper].hiding {
   -webkit-animation-name: closeRightWrapper;
   -moz-animation-name: closeRightWrapper; }
 
-#zeichen-tr .zeichen-list-item .zeichen-content-wrapper.hiding,
-#zeichen-tl .zeichen-list-item .zeichen-content-wrapper.hiding,
-#zeichen-tm .zeichen-list-item .zeichen-content-wrapper.hiding {
-  -webkit-transform-origin: 0% 0%;
-  -moz-transform-origin: 0% 0%; }
+[data-zeichen-list="tm"] [data-zeichen-list-item].showing {
+  -webkit-animation-name: openTopListItem;
+  -moz-animation-name: openTopListItem; }
+[data-zeichen-list="tm"] [data-zeichen-list-item].hiding {
+  -webkit-animation-name: closeTopListItem;
+  -moz-animation-name: closeTopListItem; }
+[data-zeichen-list="tm"] [data-zeichen-list-item] [data-zeichen-content-wrapper].showing {
+  -webkit-animation-name: openTopWrapper;
+  -moz-animation-name: openTopWrapper; }
+[data-zeichen-list="tm"] [data-zeichen-list-item] [data-zeichen-content-wrapper].hiding {
+  -webkit-animation-name: closeTopWrapper;
+  -moz-animation-name: closeTopWrapper; }
 
-#zeichen-br .zeichen-list-item .zeichen-content-wrapper.hiding,
-#zeichen-bl .zeichen-list-item .zeichen-content-wrapper.hiding,
-#zeichen-bm .zeichen-list-item .zeichen-content-wrapper.hiding {
-  -webkit-transform-origin: 0% 100%;
-  -moz-transform-origin: 0% 100%; }
+[data-zeichen-list="tl"] [data-zeichen-list-item].showing, [data-zeichen-list="bl"] [data-zeichen-list-item].showing {
+  -webkit-animation-name: openLeftListItem;
+  -moz-animation-name: openLeftListItem; }
+[data-zeichen-list="tl"] [data-zeichen-list-item].hiding, [data-zeichen-list="bl"] [data-zeichen-list-item].hiding {
+  -webkit-animation-name: closeLeftListItem;
+  -moz-animation-name: closeLeftListItem; }
+[data-zeichen-list="tl"] [data-zeichen-list-item] [data-zeichen-content-wrapper].showing, [data-zeichen-list="bl"] [data-zeichen-list-item] [data-zeichen-content-wrapper].showing {
+  -webkit-animation-name: openLeftWrapper;
+  -moz-animation-name: openLeftWrapper; }
+[data-zeichen-list="tl"] [data-zeichen-list-item] [data-zeichen-content-wrapper].hiding, [data-zeichen-list="bl"] [data-zeichen-list-item] [data-zeichen-content-wrapper].hiding {
+  -webkit-animation-name: closeLeftWrapper;
+  -moz-animation-name: closeLeftWrapper; }
+
+[data-zeichen-list="bm"] [data-zeichen-list-item].showing {
+  -webkit-animation-name: openBottomListItem;
+  -moz-animation-name: openBottomListItem; }
+[data-zeichen-list="bm"] [data-zeichen-list-item].hiding {
+  -webkit-animation-name: closeBottomListItem;
+  -moz-animation-name: closeBottomListItem; }
+[data-zeichen-list="bm"] [data-zeichen-list-item] [data-zeichen-content-wrapper].showing {
+  -webkit-animation-name: openBottomWrapper;
+  -moz-animation-name: openBottomWrapper; }
+[data-zeichen-list="bm"] [data-zeichen-list-item] [data-zeichen-content-wrapper].hiding {
+  -webkit-animation-name: closeBottomWrapper;
+  -moz-animation-name: closeBottomWrapper; }
+
+.zeichen-close {
+  top: 1rem;
+  right: 1rem;
+  text-decoration: none;
+  position: absolute;
+  color: white; }
 
 .zeichen-icon {
   position: absolute;
@@ -238,64 +251,3 @@
   width: 100%;
   color: white;
   padding: 1.5rem 2rem 1.5rem 2.5rem; }
-
-.zeichen-content-wrapper.success {
-  background-color: #43ac6a;
-  border: 1px solid #368a54; }
-
-.zeichen-content-wrapper.success:hover {
-  background-color: #368a54; }
-
-.zeichen-content-wrapper.warning {
-  background-color: #f08a24;
-  border: 1px solid #de770f; }
-
-.zeichen-content-wrapper.warning:hover {
-  background-color: #de770f; }
-
-.zeichen-content-wrapper.error {
-  background-color: #f04124;
-  border: 1px solid #cf280e; }
-
-.zeichen-content-wrapper.error:hover {
-  background-color: #cf280e; }
-
-.zeichen-content-wrapper.info {
-  background-color: #008cba;
-  border: 1px solid #007ba0; }
-
-.zeichen-content-wrapper.info:hover {
-  background-color: #007ba0; }
-
-.zeichen-close {
-  top: 1rem;
-  right: 1rem;
-  text-decoration: none;
-  position: absolute;
-  color: white; }
-
-#zeichen-tm {
-  top: 0;
-  left: 0;
-  width: 100%; }
-
-#zeichen-tl {
-  top: 0.3rem;
-  left: 0.3rem; }
-
-#zeichen-tr {
-  top: 0.3rem;
-  right: 0.3rem; }
-
-#zeichen-bm {
-  bottom: 0;
-  left: 0;
-  width: 100%; }
-
-#zeichen-bl {
-  bottom: 0.3rem;
-  left: 0.3rem; }
-
-#zeichen-br {
-  bottom: 0.3rem;
-  right: 0.3rem; }

@@ -37,8 +37,12 @@
 
 @-webkit-keyframes openLeftListItem {
   0% {
+    -webkit-transform-origin: 0% 0%;
     max-height: 0;
-    margin: 0; } }
+    margin: 0; }
+
+  100% {
+    -webkit-transform-origin: 0% 0%; } }
 
 @-webkit-keyframes closeLeftWrapper {
   0% {
@@ -149,8 +153,12 @@
 
 @-moz-keyframes openLeftListItem {
   0% {
+    -moz-transform-origin: 0% 0%;
     max-height: 0;
-    margin: 0; } }
+    margin: 0; }
+
+  100% {
+    -moz-transform-origin: 0% 0%; } }
 
 @-moz-keyframes closeLeftWrapper {
   0% {
@@ -261,8 +269,12 @@
 
 @keyframes openLeftListItem {
   0% {
+    transform-origin: 0% 0%;
     max-height: 0;
-    margin: 0; } }
+    margin: 0; }
+
+  100% {
+    transform-origin: 0% 0%; } }
 
 @keyframes closeLeftWrapper {
   0% {

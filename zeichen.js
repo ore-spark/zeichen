@@ -35,25 +35,23 @@
                   * 
                   */
                  var listTpl = '' +
-                     '<ul class="{{listClass}} {{listClassExt}} " id="{{idPrefix}}-{{listPlacement}}">' +
-                     '</ul>';
+                     '<div class="{{listClass}} {{listClassExt}} " id="{{idPrefix}}-{{listPlacement}}" data-zeichen-list="{{listPlacement}}">' +
+                     '</div>';
                  
                  /**
                   * List Item Template
                   * This is the li added to the list
-                  * The only default CSS rule used that matters here is setting the bg color on
-                  * :hover of the close icon. We pretty much do <close element>:hover ~ <content element>
-                  * in order to apply the hover effect to the content container, so it is wide to
-                  * always have the close button render in the dom before the content
+                  * *[data-zeichen-list-item] is required, and used as a jquery selector to add animation classes
+                  * *[data-zeichen-content-wrapper] is required, and used as a jquery selector to add animation classes
                   */
                  var listItemTpl = '' +
-                     '<li class="{{listItemClass}} {{listItemClassExt}} ">' +
-                     '  <div class="{{contentWrapperClass}} {{type}} {{contentWrapperClassExt}}">' +
+                     '<div class="{{listItemClass}} {{listItemClassExt}}" data-zeichen-list-item>' +
+                     '  <div class="{{contentWrapperClass}} {{type}} {{contentWrapperClassExt}}" data-zeichen-content-wrapper>' +
                      '    {{iconTplRender}}' +
                      '    {{closeTplRender}}' +
                      '    {{contentTplRender}}' +
                      '  </div>' +
-                     '</li>';                                  
+                     '</div>';                                  
                  
                  /**
                   * Close Template
@@ -64,6 +62,7 @@
                  /**
                   * Icon Template
                   * - Container, classes, and HTML that makes up the icon area
+                  * *[data-zeichen-icon] is required, and used as a jquery selector to auto center the icon
                   */
                  var iconTpl = '<div class="{{iconClass}} {{iconClassExt}} " data-zeichen-icon>{{iconText}}</div>';
 
@@ -76,10 +75,10 @@
                  var messageTpl = '<h3>{{heading}}</h3><p>{{body}}</p>';                 
 
                  /**
-                  * Contents Wrapper Template
-                  * - A wrapper for the contents panel so that we can animate the contents separately from it's li parent
+                  * Contents Template
+                  * - Template that houses the rendered message
                   */
-                 var contentTpl = '<div class="{{contentClass}} {{type}} {{contentClassExt}} " data-zeichen-content>{{messageRender}}</div>';
+                 var contentTpl = '<div class="{{contentClass}} {{type}} {{contentClassExt}} ">{{messageRender}}</div>';
                  
                  
                  //default options
@@ -90,6 +89,7 @@
                      iconAutoCenter: true, //auto center the icon in the div
                      iconShow: true, //show/hide status icon
                      closeShow: true, //show/hide close input
+                     drawCallback: function(message, $listItem){}, //callback to fire after the message has been added to dom
                      container: 'body', //selector for the list containers
                      listPosition: 'fixed', //css position of the list
                      listPlacement: 'tr', //default placement bl: bottom left, tm: top middle, etc
@@ -97,11 +97,12 @@
                      listItemActionTrigger: 'click', //trigger passed to jquery on method
                      listItemActionCallback: function(){}, //callback to fire on a user action
                      listItemLifetime: 7000, //time in ms until we start the fade/ removal animation steps
-                     listItemShowDuration: 250, //time in ms for list item to animate before wrapper show begins
+                     listItemShowDuration: 500, //time in ms for list item to animate before wrapper show begins
                      listItemHideDuration: 500, //time in ms for list item to animate before item is destroyed
-                     contentWrapperHideDuration: 0, //time in ms for content to animate before list item hide starts
+                     contentWrapperHideDuration: 500, //time in ms for content to animate before list item hide starts
                      
                      /* TEMPLATE OPTS */
+                     templateEngine: QuickEngine,
                      listTpl: listTpl,
                      listItemTpl: listItemTpl,
                      iconTpl: iconTpl,
@@ -109,7 +110,7 @@
                      messageTpl: messageTpl,
                      contentTpl: contentTpl,                     
                      
-                     /* CONTENT  OPTS */
+                     /* CONTENT OPTS */
                      successIconText: '&#10004;',
                      warningIconText: '&#x2206;',
                      errorIconText: '!',
@@ -151,22 +152,26 @@
                   * 
                   */
                  function info(message, exOptions){
-                     initListItem(message, 'info', exOptions);
+                     var $instance = initListItem(message, 'info', exOptions);
+                     return $instance;
                  }
                  function success(message, exOptions){
-                     initListItem(message, 'success', exOptions);
+                     var $instance = initListItem(message, 'success', exOptions);
+                     return $instance;
                  }
                  function warning(message, exOptions){
-                     initListItem(message, 'warning', exOptions);
+                     var $instance = initListItem(message, 'warning', exOptions);
+                     return $instance;
                  }
                  function error(message, exOptions){
-                     initListItem(message, 'error', exOptions);
+                     var $instance = initListItem(message, 'error', exOptions);
+                     return $instance;
                  }
                  function clear(exOptions){
                      var opts = $.extend({}, zeichen.options, exOptions);
-                     var $wrappers = $('.'+opts.contentWrapperClass);
-                     var $listItems = $('.'+opts.listItemClass);
-                     $wrappers.removeClass(opts.showingClass).addClass(opts.hidingClass);
+                     var $contentWrappers = $('*[data-zeichen-content-wrapper]');
+                     var $listItems = $('*[data-zeichen-list-item]');
+                     $contentWrappers.removeClass(opts.showingClass).addClass(opts.hidingClass);
                      //fire the listItem animation after contentWrapper has finished
                      setTimeout(function(){
                          $listItems.removeClass(opts.showingClass).addClass(opts.hidingClass);
@@ -174,7 +179,7 @@
                          setTimeout(function(){
                              $listItems.remove();
                          }, opts.listItemHideDuration);
-                     }, opts.contentWrapperHideDuration);                     
+                     }, opts.contentWrapperHideDuration);
                  }
                  
                  /**
@@ -182,11 +187,11 @@
                   *
                   */                 
                  function initList(placement, opts){
-                     var selector = '#'+opts.idPrefix+'-'+placement;
+                     var selector = '*[data-zeichen-list="'+placement+'"]';
                      var $list = $(selector);
                      
                      if($list.length === 0){
-                         $list = $(QuickEngine.compile(opts.listTpl).render({
+                         $list = $(opts.templateEngine.compile(opts.listTpl).render({
                              idPrefix: opts.idPrefix, 
                              listClass: opts.listClass, 
                              listClassExt: opts.listClassExt, 
@@ -217,7 +222,7 @@
                            );
                      
                      //render the close input                
-                     var closeTplRender = opts.closeShow ? QuickEngine.compile(opts.closeTpl).render({
+                     var closeTplRender = opts.closeShow ? opts.templateEngine.compile(opts.closeTpl).render({
                          closeClass: opts.closeClass, 
                          closeClassExt: opts.closeClassExt, 
                          closeText: opts.closeText
@@ -225,7 +230,7 @@
                      : '';
                      
                      //render the icon
-                     var iconTplRender = opts.iconShow ? QuickEngine.compile(opts.iconTpl).render({
+                     var iconTplRender = opts.iconShow ? opts.templateEngine.compile(opts.iconTpl).render({
                          iconClass: opts.iconClass,
                          iconClassExt: opts.iconClassExt,
                          iconText: iconText,
@@ -234,12 +239,12 @@
                      
                      //render the message template, or just use text
                      var messageRender = typeof message === 'object' ? 
-                         QuickEngine.compile(opts.messageTpl).render(message)
+                         opts.templateEngine.compile(opts.messageTpl).render(message)
                          : message;
 
 
                      //render the content area
-                     var contentTplRender = QuickEngine.compile(opts.contentTpl).render({
+                     var contentTplRender = opts.templateEngine.compile(opts.contentTpl).render({
                          type: type, 
                          contentClass: opts.contentClass, 
                          contentClassExt: opts.contentClassExt,
@@ -247,7 +252,7 @@
                      });
 
                      //initialize the outer container
-                     var $listItem = $(QuickEngine.compile(opts.listItemTpl).render({
+                     var $listItem = $(opts.templateEngine.compile(opts.listItemTpl).render({
                          listItemClass: opts.listItemClass,
                          listItemClassExt: opts.listItemClassExt,
                          contentWrapperClass: opts.contentWrapperClass,
@@ -259,23 +264,25 @@
                      }));
 
                      var $list = initList(opts.listPlacement, opts);
-                     showAlert($list, $listItem, opts);
+                     var $messageInstance = showAlert($list, $listItem, message, opts);
+                     return $messageInstance;
                  }
                  
                  //draw the alert to dom, trigger fade in and fade out animation timers
-                 function showAlert($list, $listItem, opts){
+                 function showAlert($list, $listItem, message, opts){
                      //append inner
                      if(opts.listPlacement.match(/t/g))
                          $listItem.prependTo($list);
                      if(opts.listPlacement.match(/b/g))
                          $listItem.appendTo($list);
+
+                     opts.drawCallback(message, $listItem);
                      
                      //compute top offset for the icon so it always lands in the middle
-                     var wrapperSelector = '.'+opts.contentWrapperClass;
                      var iconSelector = '.'+opts.iconClass;
                      
-                     var $wrapper = $listItem.find(wrapperSelector);
                      var $icon = $listItem.find(iconSelector);
+                     var $wrapper = $icon.closest('[data-zeichen-content-wrapper]');
                      
                      var wrapper_height = $wrapper.innerHeight();
                      var icon_height =  $icon.innerHeight();
@@ -304,7 +311,6 @@
                      var contentWrapperTimer = null;
                      var listItemTimer = null; 
                      var listItemRemoveTimer = null; 
-                     
                      
                      //if we set autoDismiss: true, run the auto dismiss triggers
                      if(opts.autoDismiss){
@@ -402,7 +408,7 @@
                              }, opts.contentWrapperHideDuration);
                          });
                      }                                                              
-                     
+                     return $listItem;
                  }                 
              })();
          }

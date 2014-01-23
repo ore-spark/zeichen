@@ -7,6 +7,9 @@
   </head>
   <body>
     <style scoped>
+     html{
+       font-family:sans-serif;
+     }
      body{
        padding:0;
        margin:0;      
@@ -17,73 +20,89 @@
      }
     </style>
     <div class="container">      
-      <button class="fire-error" data-direction="tr">Error message top right</button>
-      <button class="fire-error" data-direction="br">Error message bottom right</button>
-      <button class="fire-error" data-direction="tl">Error message top left</button>
-      <button class="fire-error" data-direction="bl">Error message bottom left</button>
-      <button class="fire-error" data-direction="tm">Error top mid</button>
-      <button class="fire-error" data-direction="bm">Error bottom mid</button>
+      <button class="fire-error" data-direction="tr">basic message top right</button>
+      <button class="fire-error" data-direction="br">basic message bottom right</button>
+      <button class="fire-error" data-direction="tl">basic message top left</button>
+      <button class="fire-error" data-direction="bl">basic message bottom left</button>
+      <button class="fire-error" data-direction="tm">basic message top middle</button>
+      <button class="fire-error" data-direction="bm">basic message bottom middle</button>
+      <button id="fire-error-tpl">message from template</button>
+      <button id="fire-error-options">many messages with instance options</button>
+      <button id="fire-error-instance">message that returns itself</button>
       <button id="fire-clear">Clear all messages</button>
-      <button id="fire-error-extra">Template Message</button>
     </div>
     <script src="jquery-2.0.3.min.js"></script>
     <script src="zeichen.js"></script>
     <script>          
+     /**
+      * GLOBALS 
+      * you can use zeiche.options.<key> = <value> to globally set the zeichen options
+      * any options passed as an argument in a function like error, info, etc. will override the globals.
+      */
      $(document).ready(function(){
+       /**
+        * BASIC USAGE
+        * zeichen.info('my message');
+        * zeichen.success('my message');
+        * zeichen.warning('my message');
+        * zeichen.error('my message');
+        */
+       $('.fire-error').on('click', function(){
+	 var $message = zeichen.info('I have a secret for you :)', {listPlacement:$(this).attr('data-direction')});
+       });
        /**
         * zeichen.clear(); to remove all message from the screen
         */
        $('#fire-clear').on('click', function(){
 	 zeichen.clear();
        });
+
        /**
-        * zeichen.info('my message');
-        * zeichen.success('my message');
-        * zeichen.warning('my message');
-        * zeichen.error('my message');
-        * these funtions pop a message to the browser in whatever the default position is
-        */
-       $('.fire-error').on('click', function(){
-         var placement = $(this).attr('data-direction');
-         console.log(placement);
-	 var choices = ['br', 'tr', 'bl', 'tr', 'br'];
-         /*
-	 zeichen.info('Here is some information about something that you might need to know about',
-                      {listPlacement:placement}); 
-	 zeichen.success('Whatever you just did, it worked. Good job, everything is not broken',
-                         {listPlacement:placement}); 
-	 zeichen.warning('Whatever you just did, something either went minorly wrong, or there could be some potentially dangerous results.',
-                         {listPlacement:placement}); 
-         */
-	 zeichen.error('Shit is straight up broken. You have destroyed us all.',
-                       {listPlacement:placement}); 
-       });
-       /**
+        * TEMPLATE MESSAGE USAGE
+        * modify zeichen.options.messageTpl to use your own template
         * zeichen.info({heading: 'My heading', body:'Something you should know'});
         * zeichen.success({heading: 'My heading', body:'Something you should know'});
         * zeichen.warning({heading: 'My heading', body:'Something you should know'});
         * zeichen.error({heading: 'My heading', body:'Something you should know'});
-        * these funtions pop a message to the browser in whatever the default position is
-        *
-        * zeichen.options contains the full options array. 
-        * They can be set globally with zechen.options.<option name> = 'something';
-        * for a better description of what stuff does, read the comments in the js file itself
-        * additionally, the options can be passed on the fly as the second argument of the
-        * zeichen.info, .success, etc functions like:
-        * zeichen.info('my message', {autoDismiss:false});
         */
-       $('#fire-error-extra').on('click', function(){
-         console.log(zeichen.options);
-         zeichen.info({heading: 'My heading', body:'Something you should know'});
-         zeichen.info('my message that doesn\'t autodismiss, and overrides the global for only this message', {autoDismiss:false});
-         zeichen.info('my message that does autodismiss, and overrides the global for only this message', {autoDismiss:true});
-         zeichen.info('Click on me for an action that fires', {
+       $('#fire-error-tpl').on('click', function(){
+         zeichen.info({heading: 'My Template heading', body:'Something you should know'});
+       });
+
+       /**
+        * OPTIONS: action callback
+        * options.autoDismiss            : bool - activate autodismiss after options.listItemLifetime
+        * options.tapDismiss             : bool - activate dismiss on a click/tap to data-zeichen-list-item
+        * options.listItemAction         : string - event type to bind the handler on. Ex. 'click', 'mouseenter'
+        * options.listItemActionCallback : function bound to the event. Attached to data-zeichen-list-item
+        * there are many more options that can be set
+        */
+       $('#fire-error-options').on('click', function(){
+         zeichen.info('Click on me for an action that fires, mouseenter and leave to pop another zeichen', {
            tapDismiss:false,
            listItemActionCallback: function(){
              alert('Hi there, you clicked on me :)');
            },
+         }).on('mouseleave', function(){
+           //because we return a jquery object, any message is chainable.
+           zeichen.info('zeichen message called from a mouseleave event registered on my parent');
          });
+         zeichen.info('my message that doesn\'t autodismiss, and overrides the global for only this message', {autoDismiss:false});
+         zeichen.info('my message that does autodismiss, and overrides the global for only this message', {autoDismiss:true});
        });
+
+       /**
+        * RETURN VALUE
+        * any call to a zeichen function (with the exception of clear()) will return a jquery object that corresponds to
+        * the list item that was just added. In this example we get the selector and change the bg color after 3 seconds
+        */
+       $('#fire-error-instance').on('click', function(){
+	 var $message = zeichen.info('I will change my background in 3 seconds');
+         setTimeout(function(){
+           $message.children().css({'background-color':'red', 'border':'none'});
+         }, 3000);
+       });
+       
      });
     </script>
   </body>	
